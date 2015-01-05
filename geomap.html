@@ -44,6 +44,17 @@
 
         d3.select("#map").style("width", w+"px").style("height", h+"px")
       }
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(redirectToPosition);
+        }
+      }
+
+      function redirectToPosition(position) {
+        var latlon = "?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
+        document.location = latlon;
+      }
     </script>
   </head>
 
@@ -56,6 +67,7 @@
         <li><a href="list.html">Liste</a></li>
       </ul>
       <button id="gpsbutton">Koordinaten beim nächsten Klick anzeigen</button>
+      <button id="locationbutton" onclick="getLocation()">Auf meinen Standort zoomen</button>
     </header>
     <div id="map"></div>
   </body>
